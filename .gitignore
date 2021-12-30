@@ -13,3 +13,4 @@
 # misc
 .pypirc
 pyproject.toml
+*.ipynb

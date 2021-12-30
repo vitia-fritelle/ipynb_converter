@@ -1,4 +1,5 @@
 import json
+import sys
 from typing import Union
 
 def ipynb_converter(filepath: str, save_name: Union[None, str] = None) -> None:
@@ -21,6 +22,21 @@ def ipynb_converter(filepath: str, save_name: Union[None, str] = None) -> None:
 
 if __name__ == "__main__":
 
-    file_path = (r"C:\Users\Vitor\Desktop\Projetos\Python"
-                 +r"\Analise_DIEESE\dados_salario_minimo.ipynb")
-    ipynb_converter(file_path)
+    try:
+        file_path = sys.argv[1]
+    except IndexError:
+        print("Missing file name.")
+        exit()
+
+    try:
+        save_name = sys.argv[2]
+    except IndexError:
+        save_name = None
+
+    try:
+        ipynb_converter(file_path, save_name)
+    except json.decoder.JSONDecodeError:
+        if not (f := open(file_path, 'rb')):
+            print("File is empty or is not in JSON format.")
+    except FileNotFoundError:
+        print("File was not found. Please, try reviewing the url.")
