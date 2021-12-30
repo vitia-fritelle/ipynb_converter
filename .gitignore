@@ -5,10 +5,11 @@
 /ipynb_converter.egg-info
 
 # testing
-/coverage
+/test
 
 # production
 /build
+__pycache__
 
 # misc
 .pypirc
